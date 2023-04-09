@@ -5,18 +5,18 @@ clear all; close all; clc;
 
 %---------------------------------------------------------------------------------------%
 %                             PUNTO 1:
-%Implementar un algoritmo de simulaciÛn para inferir el comportamiento 
-%de las variables interÈs mediante integraciÛn Euler con deltat=10e-7 s.
+%Implementar un algoritmo de simulaci√≥n para inferir el comportamiento 
+%de las variables inter√©s mediante integraci√≥n Euler con deltat=10e-7 s.
 %---------------------------------------------------------------------------------------%
 
-%Se procede a aplicar la metodologÌa utilizada en el Caso 1, puntos 1 y 2:
+%Se procede a aplicar la metodolog√≠a utilizada en el Caso 1, puntos 1 y 2:
 
-%Par·metros necesarios para simular:
+%Par√°metros necesarios para simular:
 T=5; At=1e-7; Kmax=T/At; t=linspace(0,T,Kmax);
 Va=linspace(0,0,Kmax);Tl=linspace(0,0,Kmax);
 Ia=zeros(1,Kmax); wr=zeros(1,Kmax); Zeta=zeros(1,Kmax);
 
-%Par·metros fÌsicos:
+%Par√°metros f√≠sicos:
 Laa=366e-6;
 J=5e-9;
 Ra=55.6; 
@@ -25,7 +25,7 @@ Ki=6.49e-3;
 Km=6.53e-3;
 
 %Condiciones iniciales:
-Ia(1)=0; Zeta(1)=0; wr(1)=0; Va(1)=0; Tl(1)=0; %Vectores de interÈs
+Ia(1)=0; Zeta(1)=0; wr(1)=0; Va(1)=0; Tl(1)=0; %Vectores de inter√©s
 
 %Modelo Lineal del sistema:
 
@@ -34,12 +34,12 @@ Ia(1)=0; Zeta(1)=0; wr(1)=0; Va(1)=0; Tl(1)=0; %Vectores de interÈs
 ...x2:wr
 ...x3:zeta
 ...modelo objetivo: xp=A.x+B.u
-...Se identifica como entradas u al torque de carga Tl y a la tensiÛn
+...Se identifica como entradas u al torque de carga Tl y a la tensi√≥n
 ...u1=Va
 ...u2=Tl
-...de alimentaciÛn Va
+...de alimentaci√≥n Va
 
-%A partir de las edos del modelo otorgado y aplicando linealizaciÛn por
+%A partir de las edos del modelo otorgado y aplicando linealizaci√≥n por
 %Taylor
 
 A=[-Ra/Laa -Km/Laa 0 ; Ki/J   -Bm/J  0 ; 0       1    0 ];
@@ -51,12 +51,12 @@ B2=[ 0    -1/J  0]';         %Matriz B para entrada TL
 Xop=[0     0      0]';       %punto de operacion 
 
 
-%SimulaciÛn utilizando Euler:
+%Simulaci√≥n utilizando Euler:
 Ia1(1)=0;                    %Matrices de simulacion comienzan siendo 0
 wr1(1)=0;
 zeta1(1)=0;
      
-Vin=0;                       %Par·metros de entrada iniciales
+Vin=0;                       %Par√°metros de entrada iniciales
 TL=0;
 
 ii=0;
@@ -84,7 +84,7 @@ ii=0;
      wrp =   Ki/J *Ia(i) -   Bm/J*wr(i) -   1/J*Tl(i) ;%EDO de wrpunto
      zetap=     wr(i);                                 %EDO de zetapunto
      
-     Ia(i+1)=Ia(i)+Iap*At;                             %Se aplica mÈtodo numÈrico Euler
+     Ia(i+1)=Ia(i)+Iap*At;                             %Se aplica m√©todo num√©rico Euler
      wr(i+1)=wr(i)+wrp*At; 
      Zeta(i+1)=Zeta(i)+zetap*At;
      
@@ -101,7 +101,7 @@ ii=0;
  end
 
  
- figure('Name','SimulaciÛn para Va=12V y Torque de Carga variable')
+ figure('Name','Simulaci√≥n para Va=12V y Torque de Carga variable')
  subplot(5,1,1);
  plot(t,Va,'b');title(' Va');
  subplot(5,1,2);
@@ -114,27 +114,27 @@ ii=0;
  plot(t,zeta1,'b');title(' zeta');
  
 
- disp('EL TORQUE M¡XIMO QUE PUEDE SOPORTAR EL MOTOR CON Va:12V ES: ')
+ disp('EL TORQUE M√ÅXIMO QUE PUEDE SOPORTAR EL MOTOR CON Va:12V ES: ')
  disp(TLMAX)
 
 %---------------------------------------------------------------------------------------%
 %                           PUNTO 2
-%C·lculo de la corriente m·xima = pico de corriente cuando TL=TLMAX
+%C√°lculo de la corriente m√°xima = pico de corriente cuando TL=TLMAX
 %Se realiza la misma simulacion que en el caso anterior pero con TL fijo
 %---------------------------------------------------------------------------------------%
  
  
-%Par·metros necesarios para simular:
+%Par√°metros necesarios para simular:
 T=5; At=1e-7; Kmax=T/At; t=linspace(0,T,Kmax);
 Va=linspace(0,0,Kmax);Tl=linspace(0,0,Kmax);
 Ia=zeros(1,Kmax); wr=zeros(1,Kmax); Zeta=zeros(1,Kmax);
 
-%SimulaciÛn utilizando Euler:
+%Simulaci√≥n utilizando Euler:
 Ia1(1)=0;                    %Matrices de simulacion comienzan siendo 0
 wr1(1)=0;
 zeta1(1)=0;
      
-Vin=0;                       %Par·metros de entrada iniciales
+Vin=0;                       %Par√°metros de entrada iniciales
 TL=0;
 
 ii=0;
@@ -163,7 +163,7 @@ ii=0;
      wrp =   Ki/J *Ia(i) -   Bm/J*wr(i) -   1/J*Tl(i) ;%EDO de wrpunto
      zetap=     wr(i);                                 %EDO de zetapunto
      
-     Ia(i+1)=Ia(i)+Iap*At;                             %Se aplica mÈtodo numÈrico Euler
+     Ia(i+1)=Ia(i)+Iap*At;                             %Se aplica m√©todo num√©rico Euler
      wr(i+1)=wr(i)+wrp*At; 
      Zeta(i+1)=Zeta(i)+zetap*At;
      
@@ -180,7 +180,7 @@ ii=0;
  end
 
  
- figure('Name','SimulaciÛn para Va=12V y Torque de Carga M·ximo')
+ figure('Name','Simulaci√≥n para Va=12V y Torque de Carga M√°ximo')
  subplot(5,1,1);
  plot(t,Va,'b');title(' Va');
  subplot(5,1,2);
@@ -192,7 +192,7 @@ ii=0;
  subplot(5,1,5);
  plot(t,zeta1,'b');title(' zeta');
  
- disp('LA CORRIENTE M¡XIMA CUANDO TL=TLMAX ')
+ disp('LA CORRIENTE M√ÅXIMA CUANDO TL=TLMAX ')
  disp(iMAX)
  
  
